@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoboStatus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Additional styles for theme toggle */
+    .theme-toggle {
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body class="font-sans p-4 transition-colors duration-300">
+
+  <!-- SVG ICONS (hidden) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="battery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="7" width="16" height="10" rx="2" ry="2"></rect>
+      <line x1="22" y1="10" x2="22" y2="14"></line>
+    </symbol>
+    <symbol id="droplet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+    </symbol>
+    <symbol id="activity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+    </symbol>
+    <symbol id="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </symbol>
+        <!-- New icons for theme toggle -->
+        <symbol id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </symbol>
+      <symbol id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </symbol>
+    </svg>
+  
+  </svg>
+
+  <!-- CONTENT -->
+  <div class="max-w-sm mx-auto space-y-4">
+    <div class="flex justify-between items-center">
+      <h1 class="text-2xl font-bold">RoboStatus</h1>
+      <div class="flex items-center gap-3">
+        <!-- Theme Toggle Button -->
+        
+        <p class="text-xs text-gray-400 "id="last-sync">🟢 Last sync: <span id="last-sync">2 min ago</span></p>
+        <button id="theme-toggle" class="theme-toggle w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 text-gray-300">
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor">
+            <use href="#moon-icon" />
+          </svg>
+          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor">
+            <use href="#sun-icon" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="bg-gray-800 rounded-2xl p-4 space-y-4">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+        <h2 class="font-semibold">Operational</h2>
+      </div>
+
+      <div>
+        <p class="text-sm flex items-center gap-2">
+          <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor">
+            <use href="#battery-icon" />
+          </svg>
+          <span>Battery Level</span> <span class="ml-auto text-green-400" id="battery-text">72%</span>
+        </p>
+        <div class="w-full bg-gray-700 h-2 rounded">
+          <div class="bg-green-400 h-2 rounded" id="battery-bar" style="width: 72%"></div>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-sm flex items-center gap-2">
+          <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor">
+            <use href="#droplet-icon" />
+          </svg>
+
+          <span>Water level</span><span class="ml-auto color-transition" id="water-level-text">0%</span>
+        </p>
+        <div class="w-full bg-gray-700 h-2 rounded">
+          <div class="bg-blue-400 h-2 rounded" id="water-bar" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm text-purple-400 mb-2 flex items-center gap-2">
+          <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor">
+            <use href="#activity-icon" />
+          </svg>
+          Recent Activity
+        </h3>
+        <div class="bg-gray-700 rounded-xl p-3 space-y-2">
+          <p class="text-gray-300 text-xs flex items-center gap-1">
+            <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor">
+              <use href="#check-icon" />
+            </svg>
+            Cleaning completed - Zone 2
+          </p>
+          <p class="text-gray-300 text-xs flex items-center gap-1">
+            <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor">
+              <use href="#check-icon" />
+            </svg>
+            Water refill reminder set
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-800 rounded-2xl p-4 space-y-4">
+      <h2 class="font-semibold">Quick Actions</h2>
+      <div class="grid grid-cols-2 gap-2">
+        <button id="refill-water" class="action-btn bg-blue-500">Refill Water</button>
+        <button id="start-cleaning" class="action-btn bg-blue-500">Start Cleaning</button>
+        <button id="maintenance" class="action-btn bg-blue-500">Maintenance</button>
+        <button class="action-btn bg-blue-500">Update Settings</button>
+      </div>
+    </div>
+
+    <div id="alert-box" class="bg-gray-800 rounded-2xl p-4 border border-green-400 text-green-400 text-sm flex items-center gap-2">
+      <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor"id="alert-icon">
+        <use href="#check-icon" />
+      </svg>
+      No alerts at this time. Robot is functioning normally.
+    </div>
+  </div>
+
+
+
+  
+  <script src="app.js"></script>
+</body>
+
+</html>

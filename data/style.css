@@ -1,0 +1,229 @@
+.action-btn {
+  transition: all 0.2s ease;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  background-color: var(--btn-color);
+}
+
+.action-btn:active {
+  filter: brightness(0.8);
+  transform: scale(0.95);
+  transition: all 0.1s ease; /* Faster transition for press */
+}
+#water-bar {
+   transition: width 0.05s linear; /* Faster animation */
+ }
+
+/* Water level color indicators - Make these highest priority */
+.red { 
+  color: #ef4444 !important; /* Red for <=25% */
+}    
+.orange { 
+  color: #f97316 !important; /* Orange 26-75% */
+}
+.green { 
+  color: #22c55e !important; /* Green >=76% */
+}
+
+.color-transition {
+  transition: all 0.3s ease;
+}
+
+#water-level-text {
+  /* Ensure smooth color transitions */
+  transition: color 0.3s ease !important;
+  font-weight: 600 !important; /* Make slightly bolder */
+}
+
+.animate-pulse {
+  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.processing {
+  animation: pulse 1s infinite;
+  opacity: 0.6;
+  pointer-events: none; /* Disable interactions while processing */
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* Light mode styles */
+:root {
+  /* Base colors */
+  --bg-color: #2596be; /* light gray background */
+  --text-color: #1f2937; /* dark text */
+  --card-bg: #A0D8F1; /* white cards */
+  --secondary-bg: #e5e7eb; /* lighter gray for secondary elements */
+  --btn-hover: #d1d5db;
+  
+  /* Accent colors */
+  --primary-blue: #3b82f6;    /* Medium blue */
+  --dark-blue: #1e40af;       /* Darker blue */
+  --accent-orange: #f97316;   /* Orange */
+  --accent-green: #22c55e;
+  --accent-gray: #9ca3af;     /* Gray */
+      /* Green */
+  
+  /* Text colors */
+  --primary-text: #1f2937;      /* Dark text for light mode */
+  --secondary-text: #4b5563;    /* Medium dark text for light mode */
+  --button-text: #ffffff;       /* White text for buttons in both modes */
+  --muted-text: #6b7280;        /* Muted text for light mode */
+  
+  /* Water level colors - ensure consistency in both modes */
+  --level-red: #ef4444;       /* Red <= 25% */
+  --level-orange: #f97316;    /* Orange 26-75% */
+  --level-green: #22c55e;     /* Green >= 76% */
+}
+
+/* Dark mode styles */
+.dark {
+  --bg-color: #0f172a;       /* Very dark blue background */
+  --text-color: #f9fafb;     /* light text */
+  --card-bg: #1e293b;        /* darker blue cards */
+  --secondary-bg: #334155;   /* darker blue-gray for secondary elements */
+  --btn-hover: #4b5563;
+  
+  /* Text colors for dark mode */
+  --primary-text: #f9fafb;      /* Light text for dark mode */
+  --secondary-text: #e5e7eb;    /* Slightly dimmer text for dark mode */
+  --muted-text: #9ca3af;        /* Muted text for dark mode */
+}
+
+/* CORE OVERRIDES - These need to be very specific to override Tailwind */
+
+/* Apply these variables */
+body {
+  background-color: var(--bg-color) !important;
+  color: var(--primary-text) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* CRITICAL FIX: Override the card backgrounds */
+html:not(.dark) .bg-gray-800 {
+  background-color: var(--card-bg) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+html.dark .bg-gray-800 {
+  background-color: var(--card-bg) !important;
+}
+
+html:not(.dark) .bg-gray-700 {
+  background-color: var(--secondary-bg) !important;
+}
+
+html.dark .bg-gray-700 {
+  background-color: var(--secondary-bg) !important;
+}
+
+/* Text color overrides - direct descendants of bg-gray-800 */
+.bg-gray-800 h1,
+.bg-gray-800 h2,
+.bg-gray-800 h3,
+.bg-gray-800 p,
+.bg-gray-800 span:not([class*="text-"]):not(.red):not(.orange):not(.green) {
+  color: var(--primary-text) !important;
+}
+
+/* Force all headings to use the correct text color */
+h1, h2, h3 {
+  color: var(--primary-text) !important;
+}
+
+/* Force specific color classes */
+html:not(.dark) .text-gray-300 {
+  color: var(--secondary-text) !important;
+}
+
+html:not(.dark) .text-gray-400 {
+  color: var(--muted-text) !important;
+}
+
+/* Button colors */
+.bg-blue-500 {
+  background-color: var(--primary-blue) !important;
+  color: var(--button-text) !important;
+}
+
+.bg-orange-500 {
+  background-color: var(--accent-orange) !important;
+  color: var(--button-text) !important;
+}
+
+/* Dark buttons in light mode need better contrast */
+html:not(.dark) .bg-gray-700.action-btn {
+  background-color: #4b5563 !important;
+  color: white !important;
+}
+
+/* Alert box and status indicators */
+.border-green-400 {
+  border-color: var(--accent-green) !important;
+}
+
+.text-green-400 {
+  color: var(--accent-green) !important;
+}
+
+.text-blue-400 {
+  color: var(--primary-blue) !important;
+}
+
+.text-purple-400 {
+  color: var(--accent-orange) !important;
+}
+
+#battery-text{
+  font-weight: 700 !important;
+}
+/* FIX: Ensure water level colors are properly applied and override other styles */
+#water-level-text.red {
+  color: var(--level-red) !important;
+}
+
+#water-level-text.orange {
+  color: var(--level-orange) !important;
+}
+
+#water-level-text.green {
+  color: var(--level-green) !important;
+}
+
+/* Status indicator */
+.w-3.h-3.bg-green-500 {
+  background-color: var(--accent-green) !important;
+}
+
+/* Progress bars */
+.bg-green-400 {
+  background-color: var(--accent-green) !important;
+}
+
+.bg-blue-400 {
+  background-color: var(--primary-blue) !important;
+}
+
+/* Quick fix for font legibility in light mode */
+html:not(.dark) .action-btn {
+  font-weight: 500;
+}
+
+/* Fix for alert box */
+html:not(.dark) #alert-box {
+  border: none !important;
+  color: black !important;
+}
+html:not(.dark) #alert-icon  {
+  
+  color: #000000 !important;
+}
+html:not(.dark) #last-sync { 
+  
+  color: #1f2937 !important;
+  font-weight: 600;
+}
