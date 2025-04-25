@@ -1,4 +1,4 @@
-![robo_bb](https://github.com/user-attachments/assets/dd5e705b-045c-4908-b7fa-30bc653d091b)# Solar Sweeper
+## Solar Sweeper
 
 The **Solar Sweeper** is an autonomous robot designed to clean solar panels, equipped with sensors for obstacle avoidance and distance measurement. It can navigate autonomously and make decisions based on environmental feedback. The robot uses an ESP32 as its main controller and includes various sensors to help it navigate and operate efficiently.
 
@@ -29,7 +29,8 @@ The **Solar Sweeper** is an autonomous robot designed to clean solar panels, equ
 3. Connect the **ultrasonic sensor** to measure distance from objects.
 4. Attach the **MPU6050** for balancing and motion sensing.
 5. Use the **relay** to manage high-power devices if necessary.
-[5375a66e-c5a3-476f-bf6d-5707b830bf7a.dxf-0001.pdf](https://github.com/user-attachments/files/19902252/5375a66e-c5a3-476f-bf6d-5707b830bf7a.dxf-0001.pdf)
+[5375a66e-c5a3-476f-bf6d-5707b830bf7a.dxf-0001.pdf](https://github.com/user-attachments/files/19902290/5375a66e-c5a3-476f-bf6d-5707b830bf7a.dxf-0001.pdf)
+
 
 ### Software
 ![image](https://github.com/user-attachments/assets/73c28cd5-7a9b-4f80-a646-61fccd9d5168)
